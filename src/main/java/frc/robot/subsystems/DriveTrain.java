@@ -14,6 +14,7 @@ import frc.robot.RobotContainer;
 public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX left = new WPI_TalonSRX(Constants.leftPort);
   private WPI_TalonSRX right = new WPI_TalonSRX(Constants.rightPort);
+  private double ticksToMeters= (127.0/10581.0)/100;
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     left.configFactoryDefault();
@@ -30,5 +31,12 @@ public class DriveTrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     tankDrive(RobotContainer.getJoy1().getY(), RobotContainer.getJoy2().getY());
+  }
+  public double getPos(){
+    return((left.getSelectedSensorPosition()+right.getSelectedSensorPosition())/2*ticksToMeters);
+  }
+  public void resetEncoders() {
+    left.setSelectedSensorPosition(0);
+    right.setSelectedSensorPosition(0);
   }
 }

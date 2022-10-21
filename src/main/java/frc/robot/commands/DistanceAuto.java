@@ -30,7 +30,7 @@ public class DistanceAuto extends CommandBase {
       drive.tankDrive(0.3,0.3);
     }
     else{
-      drive.tankDrive(0,0)
+      drive.tankDrive(0,0);
     }
   }
 
